@@ -1,5 +1,6 @@
 # dependencies
 import os
+import tensorflow as tf
 from flask import Flask, flash, request, request, redirect, url_for, send_from_directory
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
@@ -27,6 +28,9 @@ cors = CORS(app, resources=resources)
 def allowed_file(filename):
     return "." in filename and \
            filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# machine learning model
+cnn = tf.keras.models.load_model('./models/cnn.h5')
 
 # routes
 @app.route("/image", methods=["GET", "POST"])
