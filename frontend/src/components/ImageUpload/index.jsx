@@ -6,7 +6,7 @@ import { Image } from './components';
 
 const ImageUpload = ({ onFileChange }) => {
     const [file, setFile] = React.useState(null);
-    const [pred, setPred] = React.useState(null);
+    const [banner, setBanner] = React.useState(null);
     const inputRef = React.useRef(null);
 
     const fileReader = React.useMemo(() => {
@@ -25,19 +25,29 @@ const ImageUpload = ({ onFileChange }) => {
 
     const onPredictClick = React.useCallback(async () => {
       if (!!inputRef.current && file) {
-        const result = await uploadFile(file);
-        setPred(result);
+        setBanner('waiting for response...');
+
+        try {
+          const { confidence, predictedClass } = await uploadFile(file);
+          const roundedConf = Math.round(confidence * 100) / 100;
+          setBanner(`The predicted class was "${predictedClass}" with confidence ${roundedConf}%`);
+        } catch (err) {
+          console.err(err);
+          setBanner("Error: Something went wrong with the prediction");
+        }
       }
-    }, [file, inputRef, setPred]);
+    }, [file, inputRef, setBanner]);
 
     const onClearClick = React.useCallback(() => {
+      setBanner('');
       setFile(null);
       onFileChange(null);
+      if (inputRef.current) inputRef.current.value = '';
     }, [setFile, onFileChange]);
 
     return (
       <ColumnFlex>
-        {pred && <div>{pred}</div>}
+        {banner && <div>{banner}</div>}
         <input ref={inputRef} type="file" onChange={handleChange}/>
         {file && <Image src={file} alt="the uploaded file" height={400} width={300} />}
         <div>

@@ -45,10 +45,11 @@ export const lighten = (color, percent) => {
 
     const coord = [];
     for (let i = 1; i < NUM_CHANNELS * CHANNEL_STRLEN; i += CHANNEL_STRLEN) {
-        coord.push(16 * color[i] + color[i + 1]);
+        coord.push(color.substr(i, CHANNEL_STRLEN));
     }
 
-    return `#${coord.map(chan => Math.floor(chan + percent * (MAX_RGB_VALUE - chan)))
+    return `#${coord.map(hexstr => parseInt(hexstr, 16))
+                    .map(chan => Math.floor(chan + percent * (MAX_RGB_VALUE - chan)))
                     .map(chan => Math.max(Math.min(chan, MAX_RGB_VALUE), 0))
                     .map(chan => ("0" + chan.toString(16)).slice(-2))
                     .join("")}`;

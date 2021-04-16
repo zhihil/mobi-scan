@@ -6,11 +6,16 @@ async function uploadFile(file) {
     const imageForm = new FormData();
     imageForm.append('file', file);
 
-    axios.post(`${BACKEND_ENDPOINT}/image`, imageForm)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+    const { confidence, predicted_class } = await axios.post(`${BACKEND_ENDPOINT}/image`,  imageForm, { 
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    }).then(({ data }) => data);
 
-    return "mock-prediction"
+    return {
+        confidence,
+        predictedClass: predicted_class
+    };
 }
 
 export default uploadFile;
