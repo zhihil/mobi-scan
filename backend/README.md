@@ -1,27 +1,43 @@
-# Backend
-## Overview
-This is a Python server built using Flask, to where the mobile app uploads images for prediction. 
+# Backend, Flask Server with ML Model
 
-## Todo
-1. Put the server on HTTPS
-2. Database connection for fun?
-3. Add environment variables so that the backend only accepts CORS requests from the ngrok public endpoint
-4. Add some flags to distinguish between prod and dev
-5. Need to test this app and the frontend to make sure someone can install it and get it working end-to-end
-6. Try integrating RabbitMQ to the backend
+---
+
+## Overview
+This is a Flask server which loads a machine learning model with TensorFlow. It accepts requests from the React client, parses the data URI into a PIL `Image` class, and returns the predicted class. 
 
 ## Setup
-1. Install the dependencies
+
+1. Go to the `/backend` folder 
+2. Run the following:
+
 ```bash
+python3 -m venv ./venv
+source ./venv/bin/activate
 pip install -r requirements.txt
 ```
-2. Run the server on development
+
+3. Execute `./scripts/rundev.sh` to start the server.
+
 ```bash
-export FLASK_ENV=development
-export FLASK_APP=index.py
+chmod 755 ./scripts/rundev.sh
+./scripts/rundev.sh
+```
+
+- **NOTE:** The `rundev.sh` script simply sets environment variables telling Flask what the server entry-point is and then starts Flask. You can learn more about the script [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/). The `rundev.sh` script essentially just runs the following lines:
+
+```bash
+export FLASK_APP=hello.py
 flask run
 ```
-3. (Optional) Use Ngrok to expose the server to the public. This is necessary for the MobiScan mobile app to access the server
-```bash
-ngrok http 5000
-```
+
+## Skills Demonstrated
+
+- Ability to learn quickly - Learned Flask, HTTP request with form data, data URIs, and PIL quickly to build the project.
+- Flask
+  - Setting CORS 
+  - Creating a CRUD endpoint
+- Deploying a machine learning model to a server
+  - Loading the model
+  - Preprocessing input data into a format accepted by the convnet.
+  - Applying softmax to convert logits into interpretable probabilities. 
+
