@@ -1,75 +1,46 @@
-# Getting Started with Create React App
+# Frontend, React Image Upload Client
 
-## TODO
-1. Add some ESLint configurations
-2. Add setup instructions to run on ngrok http
-3. Add environment variables to configure the connection with the backend.
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This is a frontend client built in React which renders an image input, uploads the image to the backend, and displays the prediction from the convnet. 
 
-In the project directory, you can run:
+## Setup
 
-### `yarn start`
+In the Terminal, run the following:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Setup the `backend` for MobiScan before you run this project. 
+2. `yarn install` 
+3. `yarn start` 
+4. Open `https://localhost:3000` 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To use the app:
 
-### `yarn test`
+1. Click "Browse..." on the file input
+2. In the file upload modal, select an image file
+3. Click Predict and wait until the backend responds
+4. You will see the result of the prediction and the confidence level at the top banner, when the convnet has made a response.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In the `test-examples` folder, you will find some example images which you can upload through the client and have the convnet classify the image. 
 
-### `yarn build`
+## Skills Demonstrated
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For recruiters, the project demonstrates the following skills:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React
+  - React Hooks - `.useState`, `.useRef`, `.useMemo`, `.useCallback` 
+  - React controlled component
+- Styling - Responsive breakpoints, flexbox, various other techniques. 
+- HTTP Calls - See `uploadFile` 
+- General software engineering principles
+  - Separating the UI into reusable components - See `<Button>`, `<Flex>`, `<ImageUpload>`
+  - Creating resuable utilities for common tasks - See `unit()`, `lighten()`, `breakpoints()`, and `transitionAll()` helpers 
+  - Standard good coding practices - See `REGEX_RGB_HEXSTRING`, `CHANNEL_STRLEN`, `NUM_CHANNELS` which are used avoid magic numbers and maintainability issues. 
+  - Functional programming - `lighten()` uses some mapping 
+- Creative problem solving 
+  - `lighten(color, percent)` - A CSS utility that computes the `color` lightened by the given `percent`. This is useful for enforcing consistency in the color styling across the app.
+    - Inspired by linear algebra. An RGB value can be viewed as a point in 3D space, `(r, g, b)`, and the operation of "lightening" a color value is essentially equivalent to translating the point `(r, g, b)` closer to `(255, 255, 255)` along the line which passes through `(r, g, b)` and `(255, 255, 255)`. 
+- Misc. frontend technologies
+  - `FileReader()` 
+  - `FormData()`

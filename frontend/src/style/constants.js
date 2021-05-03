@@ -1,3 +1,6 @@
+/**
+ * The global styling configuration for the MobiScan app
+ */
 export const theme = {
     colors: {
         primary: '#196969',

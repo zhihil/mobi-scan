@@ -6,3 +6,7 @@ export const Image = styled.img`
 
     border-radius: ${({ theme }) => theme.dim.border.radius}px;
 `;
+
+export const ButtonContainer = styled.div`
+    width: 200px;
+`;

@@ -4,6 +4,8 @@ import ImageUpload from "../../components/ImageUpload";
 import { Container, Background } from "./components";
 
 function App() {
+  // The `hasFile` var is used in `Container` to adjust the styling to accomodate
+  // the uploaded image.
   const [hasFile, setHasFile] = React.useState(false);
 
   const onFileChange = React.useCallback((file) => {
